@@ -180,4 +180,21 @@ public class HardwareMetricTest implements Serializable {
         }
     }
 
+    private static void getRefactorings(List<RevCommit> commitsInLastNHours, GitHistoryRefactoringMiner miner, Repository repo, ArrayList<Refactoring> refs) {
+        try {
+            for (RevCommit commit : commitsInLastNHours) {
+                miner.detectAtCommit(repo,
+                        commit.getName(),
+                        new RefactoringHandler() {
+                            @Override
+                            public void handle(String commitId, List<Refactoring> refactorings) {
+                                refs.addAll(refactorings);
+                            }
+                        });
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
