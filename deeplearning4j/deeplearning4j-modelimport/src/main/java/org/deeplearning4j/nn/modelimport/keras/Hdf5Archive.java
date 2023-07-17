@@ -101,7 +101,7 @@ public class Hdf5Archive implements Closeable {
      * @return INDArray of HDF5 group data
      * @throws UnsupportedKerasConfigurationException Unsupported Keras config
      */
-    public INDArray readDataSet(String datasetName, String... groups) throws UnsupportedKerasConfigurationException {
+    public INDArray readDataSetRename(String datasetName, String... groups) throws UnsupportedKerasConfigurationException {
         synchronized (Hdf5Archive.LOCK_OBJECT) {
             if (groups.length == 0)
                 return readDataSet(this.file, datasetName);
